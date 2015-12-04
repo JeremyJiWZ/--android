@@ -122,7 +122,7 @@ public class GameActivity extends AppCompatActivity {
         if(dir==3)
             plane.setImageResource(R.drawable.plane_left);
     }
-    
+
 
 
     class LeftSpinListener implements ImageButton.OnClickListener{

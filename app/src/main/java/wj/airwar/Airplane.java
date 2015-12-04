@@ -1,12 +1,14 @@
 package wj.airwar;
 
+import java.util.ArrayList;
+
 /**
 * Created by jiwentadashi on 15/11/25.
 */
 
 public class Airplane
 {
-	Plane plane[] = new Plane[3];
+	ArrayList<Plane> plane = new ArrayList<Plane>();
 	int alive;
 	int[][] board;//0:nothing, 1:body, 2:head, 3:hit
 
@@ -19,7 +21,12 @@ public class Airplane
 	public void reset()
 	{
 		int i,j;
-		plane = new Plane[3];
+		Plane plane1 = new Plane();
+		Plane plane2 = new Plane();
+		Plane plane3 = new Plane();
+		plane.add(plane1);
+		plane.add(plane2);
+		plane.add(plane3);
 		alive = 3;
 		for (i=0; i<10; i++)
 			for (j=0; j<10; j++)
@@ -47,8 +54,8 @@ public class Airplane
 		board[row][col] = 2;
 		for (i=1; i<10; i++)
 			board[ row+SHAPE[d][i][0] ][ col+SHAPE[d][i][1] ] = 1;
-		plane[num].place(row, col, d);
-		plane[num].isPlace = true;
+		plane.get(num).place(row, col, d);
+		plane.get(num).isPlace = true;
 
 		return true;
 	}
@@ -56,32 +63,32 @@ public class Airplane
 	public void unplace(int num)
 	{
 		int i,j;
-		if (plane[num].isPlace)
+		if (plane.get(num).isPlace)
 		{
-			plane[num].unplace();
+			plane.get(num).unplace();
 			for (i = 0; i < 10; i++)
-				board[ plane[num].row + SHAPE[plane[num].d][i][0] ][ plane[num].col + SHAPE[plane[num].d][i][1] ] = 0;
+				board[ plane.get(num).row + SHAPE[plane.get(num).d][i][0] ][ plane.get(num).col + SHAPE[plane.get(num).d][i][1] ] = 0;
 		}
 	}
 
 	public boolean isAllPlaced()
 	{
-		return plane[0].isPlace && plane[1].isPlace && plane[2].isPlace;
+		return plane.get(0).isPlace && plane.get(1).isPlace && plane.get(2).isPlace;
 	}
 
 	public int getRow(int num)
 	{
-		return plane[num].row;
+		return plane.get(num).row;
 	}
 
 	public int getCol(int num)
 	{
-		return plane[num].col;
+		return plane.get(num).col;
 	}
 
 	public int getDirection(int num)
 	{
-		return plane[num].d;
+		return plane.get(num).d;
 	}
 	
 //boom the planes
