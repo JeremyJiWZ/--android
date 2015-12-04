@@ -32,6 +32,8 @@ public class Airplane
 	{
 		return 0;
 	}
+
+	public int getDir
 	
 //tell if all dead
 	public boolean isAllDead()
@@ -40,7 +42,7 @@ public class Airplane
 			if (plane[i].isAlive == true) return false;
 		return true;
 	}
-}1
+}
 
 class Plane
 {
