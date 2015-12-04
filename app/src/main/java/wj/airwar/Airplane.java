@@ -16,10 +16,10 @@ public class Airplane
 		return true;
 	}
 	
-	public boolean placePlane(int num,int row,int col,int d)
-	{
-		return airs[num].place(row, col, d);
-	}
+//	public boolean placePlane(int num,int row,int col,int d)
+//	{
+//		return airs[num].place(row, col, d);
+//	}
 	
 	public void reset()
 	{
@@ -40,33 +40,33 @@ public class Airplane
 			if (plane[i].isAlive == true) return false;
 		return true;
 	}
-}
+}1
 
 class Plane
 {
 	int row,col,d;//0:up,1:right,2:down,3:left; 0:tail upwards
 	boolean isPlace;
 	boolean isAlive;
-	static final int shape[][][] = new int[4][10][2] = 
-			{
-					
-			};
+//	static final int shape[][][] = new int[4][10][2] =
+//			{
+//
+//			};
 	
 	void Plane()
 	{
 		isPlace=false;
-		isalive=false;
+		isAlive=false;
 	}
 	
 	boolean place(int row,int col,int d)
 	{
 		if (row < 0 || row > 9) return false;
 		if (col < 0 || col > 9) return false;
-		if ()
+		//if ()
 		
 		
 		isPlace = true;
-		isalive = true;
+		isAlive = true;
 		return true;
 	}
 }
