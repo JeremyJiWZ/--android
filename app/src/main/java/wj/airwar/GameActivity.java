@@ -1,5 +1,6 @@
 package wj.airwar;
 
+import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -9,10 +10,12 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 public class GameActivity extends AppCompatActivity {
 
     private int choosenPlane=0;//1 for plane 1, 2 for plane 2, 3 for plane 3
+    private int player=1; //player 1 or player 2
     private int lastX,lastY;
     private int screenWidth,screenHeight;
     private Airplane player1 = new Airplane();
@@ -41,6 +44,14 @@ public class GameActivity extends AppCompatActivity {
         spinLeft.setOnClickListener(new RightSpinListener());
 
         Button start = (Button)findViewById(R.id.button);
+        start.setOnClickListener(new StartListener());
+
+
+        //initialize
+        plane1.setImageResource(R.drawable.plane_up);
+        plane2.setImageResource(R.drawable.plane_up);
+        plane3.setImageResource(R.drawable.plane_up);
+
     }
 
     class MovePlaneListener implements ImageView.OnTouchListener {
@@ -101,7 +112,7 @@ public class GameActivity extends AppCompatActivity {
 
     //set direction 0:up,1:right,2:down,3:left
     private void setDir(ImageView plane,int dir){
-        
+
         if(dir==0)  //up
             plane.setImageResource(R.drawable.plane_up);
         if(dir==1)
@@ -111,17 +122,13 @@ public class GameActivity extends AppCompatActivity {
         if(dir==3)
             plane.setImageResource(R.drawable.plane_left);
     }
-
-
-
-
-
+    
 
 
     class LeftSpinListener implements ImageButton.OnClickListener{
         @Override
         public void onClick(View v) {
-            int dir = player1.getDir(choosenPlane);
+            int dir = player1.getDirection(choosenPlane - 1);
             dir -=1;//turn left
             if(dir<0)//up
                 dir=3;//left
@@ -140,7 +147,7 @@ public class GameActivity extends AppCompatActivity {
     class RightSpinListener implements ImageButton.OnClickListener{
         @Override
         public void onClick(View v) {
-            int dir = player1.getDir(choosenPlane);
+            int dir = player1.getDirection(choosenPlane - 1);
             dir +=1;//turn right
             if(dir>3)//left
                 dir=0;//up
@@ -153,6 +160,30 @@ public class GameActivity extends AppCompatActivity {
                 plane = (ImageView)findViewById(R.id.plane3);
             if (plane !=null)
                 setDir(plane,dir);
+
         }
     }
+    private void resetPlane(){}
+    class StartListener implements View.OnClickListener{
+        @Override
+        public void onClick(View v) {
+            if (player==1) {
+                //if(player1 planes are placed correctly)
+                player = 2;
+                resetPlane();
+                TextView textView = (TextView)findViewById(R.id.player);
+                textView.setText("Player2");
+                return;
+            }
+            if (player==2){
+                //if(player2 planes are placed correctly)
+
+                Intent intent = new Intent();
+                intent.setClass(GameActivity.this,Double_Activity.class);
+                startActivity(intent);
+                return;
+            }
+        }
+    }
+
 }

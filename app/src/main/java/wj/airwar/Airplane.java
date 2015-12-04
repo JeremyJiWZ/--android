@@ -6,7 +6,7 @@ package wj.airwar;
 
 public class Airplane
 {
-	Plane[] plane;
+	Plane plane[] = new Plane[3];
 	int alive;
 	int[][] board;//0:nothing, 1:body, 2:head, 3:hit
 
@@ -18,6 +18,7 @@ public class Airplane
 
 	public void reset()
 	{
+		int i,j;
 		plane = new Plane[3];
 		alive = 3;
 		for (i=0; i<10; i++)
@@ -28,6 +29,7 @@ public class Airplane
 //place the planes
 	//返回false表示要把该飞机放回棋盘外
 	public boolean placePlane(int num,int row,int col,int d) {
+		int i,j;
 		//is re-place
 		unplace(num);
 
@@ -39,7 +41,7 @@ public class Airplane
 
 		//collision
 		for (i=0; i<10; i++)
-			if ( board[ row + SHAPE[d][i][0] ][ col + SHAPE[d][i][1] ] ) return false;
+			if ( board[ row + SHAPE[d][i][0] ][ col + SHAPE[d][i][1] ]!=0 ) return false;
 
 		//place
 		board[row][col] = 2;
@@ -53,6 +55,7 @@ public class Airplane
 
 	public void unplace(int num)
 	{
+		int i,j;
 		if (plane[num].isPlace)
 		{
 			plane[num].unplace();
@@ -102,11 +105,6 @@ public class Airplane
 		}
 		return 0;
 	}
-<<<<<<< Updated upstream
-=======
-
-	public int getDir(int plane){return 1;}
->>>>>>> Stashed changes
 	
 //tell if all dead
 	public boolean isAllDead()
