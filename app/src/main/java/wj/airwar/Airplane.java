@@ -102,6 +102,11 @@ public class Airplane
 		}
 		return 0;
 	}
+<<<<<<< Updated upstream
+=======
+
+	public int getDir(int plane){return 1;}
+>>>>>>> Stashed changes
 	
 //tell if all dead
 	public boolean isAllDead()
