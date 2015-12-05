@@ -1,14 +1,12 @@
 package wj.airwar;
 
-import java.util.ArrayList;
-
 /**
 * Created by jiwentadashi on 15/11/25.
 */
 
 public class Airplane
 {
-	ArrayList<Plane> plane = new ArrayList<Plane>();
+	Plane[] plane = new Plane[3];
 	int alive;
 	int[][] board;//0:nothing, 1:body, 2:head, 3:hit
 
@@ -20,23 +18,18 @@ public class Airplane
 
 	public void reset()
 	{
-		int i,j;
-		Plane plane1 = new Plane();
-		Plane plane2 = new Plane();
-		Plane plane3 = new Plane();
-		plane.add(plane1);
-		plane.add(plane2);
-		plane.add(plane3);
+		plane[0] = new Plane();
+		plane[1] = new Plane();
+		plane[2] = new Plane();
 		alive = 3;
-		for (i=0; i<10; i++)
-			for (j=0; j<10; j++)
+		for (int i=0; i<10; i++)
+			for (int j=0; j<10; j++)
 				board[i][j] = 0;
 	}
 
 //place the planes
 	//返回false表示要把该飞机放回棋盘外
 	public boolean placePlane(int num,int row,int col,int d) {
-		int i,j;
 		//is re-place
 		unplace(num);
 
@@ -47,48 +40,47 @@ public class Airplane
 		if (d==3 && !(row >=2 && row <=7 && col >=3 && col <=9)) return false;
 
 		//collision
-		for (i=0; i<10; i++)
-			if ( board[ row + SHAPE[d][i][0] ][ col + SHAPE[d][i][1] ]!=0 ) return false;
+		for (int i=0; i<10; i++)
+			if ( board[ row + SHAPE[d][i][0] ][ col + SHAPE[d][i][1] ] != 0 ) return false;
 
 		//place
 		board[row][col] = 2;
-		for (i=1; i<10; i++)
+		for (int i=1; i<10; i++)
 			board[ row+SHAPE[d][i][0] ][ col+SHAPE[d][i][1] ] = 1;
-		plane.get(num).place(row, col, d);
-		plane.get(num).isPlace = true;
+		plane[num].place(row, col, d);
+		plane[num].isPlace = true;
 
 		return true;
 	}
 
 	public void unplace(int num)
 	{
-		int i,j;
-		if (plane.get(num).isPlace)
+		if (plane[num].isPlace)
 		{
-			plane.get(num).unplace();
-			for (i = 0; i < 10; i++)
-				board[ plane.get(num).row + SHAPE[plane.get(num).d][i][0] ][ plane.get(num).col + SHAPE[plane.get(num).d][i][1] ] = 0;
+			plane[num].unplace();
+			for (int i = 0; i < 10; i++)
+				board[ plane[num].row + SHAPE[plane[num].d][i][0] ][ plane[num].col + SHAPE[plane[num].d][i][1] ] = 0;
 		}
 	}
 
 	public boolean isAllPlaced()
 	{
-		return plane.get(0).isPlace && plane.get(1).isPlace && plane.get(2).isPlace;
+		return plane[0].isPlace && plane[1].isPlace && plane[2].isPlace;
 	}
 
 	public int getRow(int num)
 	{
-		return plane.get(num).row;
+		return plane[num].row;
 	}
 
 	public int getCol(int num)
 	{
-		return plane.get(num).col;
+		return plane[num].col;
 	}
 
 	public int getDirection(int num)
 	{
-		return plane.get(num).d;
+		return plane[num].d;
 	}
 	
 //boom the planes
