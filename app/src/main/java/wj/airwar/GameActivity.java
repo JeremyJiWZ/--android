@@ -5,11 +5,13 @@ import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 public class GameActivity extends AppCompatActivity {
@@ -17,7 +19,7 @@ public class GameActivity extends AppCompatActivity {
     private int choosenPlane=0;//1 for plane 1, 2 for plane 2, 3 for plane 3
     private int player=1; //player 1 or player 2
     private int lastX,lastY;
-    private int screenWidth,screenHeight;
+    private int screenWidth,screenHeight,length;
     private Airplane player1 = new Airplane();
     private Airplane player2 = new Airplane();
     @Override
@@ -28,6 +30,10 @@ public class GameActivity extends AppCompatActivity {
         DisplayMetrics dm = getResources().getDisplayMetrics();
         screenWidth = dm.widthPixels;
         screenHeight = dm.heightPixels - 50;
+        length = screenHeight/14;
+        Log.i("test", "screenWidth = "+screenWidth);
+        Log.i("test", "screenHeight = "+screenHeight);
+        Log.i("test", "length = "+length);
 
         ImageButton spinLeft= (ImageButton)findViewById(R.id.spinLeft);
         ImageButton spinRight = (ImageButton)findViewById(R.id.spinRight);
@@ -35,6 +41,21 @@ public class GameActivity extends AppCompatActivity {
         ImageView plane1 = (ImageView)findViewById(R.id.plane1);
         ImageView plane2 = (ImageView)findViewById(R.id.plane2);
         ImageView plane3 = (ImageView)findViewById(R.id.plane3);
+
+        RelativeLayout.LayoutParams lp =
+                new RelativeLayout.LayoutParams(length * 5, length * 5);
+        lp.leftMargin = length * 12 + length / 2;
+        lp.topMargin = length * 2 + length / 2;
+        plane1.setLayoutParams(lp);
+        plane2.setLayoutParams(lp);
+        plane3.setLayoutParams(lp);
+//
+//        plane1.setX(length * 12 + length / 2);
+//        plane1.setY(length * 2 + length / 2);
+//        plane2.setX(length * 12 + length / 2);
+//        plane2.setY(length * 2 + length / 2);
+//        plane3.setX(length * 12 + length / 2);
+//        plane3.setY(length * 2 + length / 2);
 
         plane1.setOnTouchListener(new MovePlaneListener());
         plane2.setOnTouchListener(new MovePlaneListener());
@@ -58,6 +79,10 @@ public class GameActivity extends AppCompatActivity {
         @Override
         public boolean onTouch(View v, MotionEvent event) {
             int action = event.getAction();
+            int left;
+            int top;
+            int right;
+            int bottom;
             switch (action) {
                 case MotionEvent.ACTION_DOWN:
                     lastX = (int) event.getRawX();
@@ -68,10 +93,10 @@ public class GameActivity extends AppCompatActivity {
                 case MotionEvent.ACTION_MOVE:
                     int dx = (int) event.getRawX() - lastX;
                     int dy = (int) event.getRawY() - lastY;
-                    int left = v.getLeft() + dx;
-                    int top = v.getTop() + dy;
-                    int right = v.getRight() + dx;
-                    int bottom = v.getBottom() + dy;
+                    left = v.getLeft() + dx;
+                    top = v.getTop() + dy;
+                    right = v.getRight() + dx;
+                    bottom = v.getBottom() + dy;
                     //test
 //                    Log.e("Notice:x",event.getRawX()+"\n");
 //                    Log.e("Notice:y",event.getRawY()+"\n");
@@ -98,6 +123,12 @@ public class GameActivity extends AppCompatActivity {
                     lastY = (int) event.getRawY();
                     break;
                 case MotionEvent.ACTION_UP:
+                    left = v.getLeft();
+                    top = v.getTop();
+                    right = v.getRight();
+                    bottom = v.getBottom();
+                    v.layout(length/2+left/length*length, length/2+top/length*length,
+                            length/2+right/length*length, length/2+bottom/length*length);
                     break;
             }
             if (v.getId()==R.id.plane1)
