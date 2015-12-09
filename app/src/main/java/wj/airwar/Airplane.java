@@ -29,9 +29,15 @@ public class Airplane
 
 //place the planes
 	//返回false表示要把该飞机放回棋盘外
-	public boolean placePlane(int num,int row,int col,int d) {
+	public boolean placePlane(int num,int row,int col,int d)
+	{
 		//is re-place
 		unplace(num);
+		
+		//get real row col
+		Tran.get(row, col, d);
+		row = Tran.realRow;
+		col = Tran.realCol;
 
 		//out of field
 		if (d==0 && !(row >=3 && row <=9 && col >=2 && col <=7)) return false;
@@ -119,6 +125,34 @@ public class Airplane
 			{{0, 0}, {1, -2}, {1, -1}, {1, 0}, {1, 1}, {1, 2}, {2, 0}, {3, -1}, {3, 0}, {3, 1}},
 			{{0, 0}, {-2, -1}, {-1, -1}, {0, -1}, {1, -1}, {2, -1}, {0, -2}, {-1, -3}, {0, -3}, {1, -3}}
 	};
+
+	static class Tran
+	{
+		static int realRow;
+		static int realCol;
+		static void get(int row, int col, int d)
+		{
+			switch (d)
+			{
+				case 0:
+					realRow = row+1;
+					realCol = col+2;
+					break;
+				case 1:
+					realRow = row+2;
+					realCol = col+3;
+					break;
+				case 2:
+					realRow = row+3;
+					realCol = col+2;
+					break;
+				case 3:
+					realRow = row+2;
+					realCol = col+1;
+					break;
+			}
+		}
+	}
 }
 
 class Plane
