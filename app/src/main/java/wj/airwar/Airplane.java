@@ -31,13 +31,17 @@ public class Airplane
 	//返回false表示要把该飞机放回棋盘外
 	public boolean placePlane(int num,int row,int col,int d)
 	{
-		//is re-place
-		unplace(num);
-		
 		//get real row col
-		Tran.get(row, col, d);
+		Tran.in(row, col, d);
 		row = Tran.realRow;
 		col = Tran.realCol;
+		return placePlanePv(num,row,col,d);
+	}
+
+	private boolean placePlanePv(int num,int row,int col,int d)
+	{
+		//is re-place
+		unplace(num);
 
 		//out of field
 		if (d==0 && !(row >=3 && row <=9 && col >=2 && col <=7)) return false;
@@ -73,13 +77,24 @@ public class Airplane
 	{
 		return plane[0].isPlace && plane[1].isPlace && plane[2].isPlace;
 	}
-
 	public int getRow(int num)
+	{
+		Tran.outRow(getRowPv(num), plane[num].d);
+		return Tran.realRow;
+	}
+
+	public int getRowPv(int num)
 	{
 		return plane[num].row;
 	}
 
 	public int getCol(int num)
+	{
+		Tran.outCol(getColPv(num), plane[num].d);
+		return Tran.realCol;
+	}
+
+	public int getColPv(int num)
 	{
 		return plane[num].col;
 	}
@@ -87,6 +102,15 @@ public class Airplane
 	public int getDirection(int num)
 	{
 		return plane[num].d;
+	}
+
+	//返回false表示要把该飞机放回棋盘外
+	public boolean setDirection(int num, int d)
+	{
+		if (plane[num].isPlace)
+			return placePlanePv(num, getRowPv(num), getColPv(num), d);
+		plane[num].d = d;
+		return false;
 	}
 	
 //boom the planes
@@ -130,7 +154,7 @@ public class Airplane
 	{
 		static int realRow;
 		static int realCol;
-		static void get(int row, int col, int d)
+		static void in(int row, int col, int d)
 		{
 			switch (d)
 			{
@@ -152,6 +176,42 @@ public class Airplane
 					break;
 			}
 		}
+		static void outRow(int row, int d)
+		{
+			switch (d)
+			{
+				case 0:
+					realRow = row-1;
+					break;
+				case 1:
+					realRow = row-2;
+					break;
+				case 2:
+					realRow = row-3;
+					break;
+				case 3:
+					realRow = row-2;
+					break;
+			}
+		}
+		static void outCol(int col, int d)
+		{
+			switch (d)
+			{
+				case 0:
+					realCol = col-2;
+					break;
+				case 1:
+					realCol = col-3;
+					break;
+				case 2:
+					realCol = col-2;
+					break;
+				case 3:
+					realCol = col-1;
+					break;
+			}
+		}
 	}
 }
 
@@ -162,8 +222,7 @@ class Plane
 
 	Plane()
 	{
-		row = col = -1;
-		d = 0;
+		row = col = d = -1;
 		isPlace=false;
 	}
 	
