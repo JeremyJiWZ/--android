@@ -22,6 +22,9 @@ public class GameActivity extends AppCompatActivity {
     private int screenWidth,screenHeight,length;
     private Airplane player1 = new Airplane();
     private Airplane player2 = new Airplane();
+    ImageView plane1;
+    ImageView plane2;
+    ImageView plane3;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,9 +41,9 @@ public class GameActivity extends AppCompatActivity {
         ImageButton spinLeft= (ImageButton)findViewById(R.id.spinLeft);
         ImageButton spinRight = (ImageButton)findViewById(R.id.spinRight);
 
-        ImageView plane1 = (ImageView)findViewById(R.id.plane1);
-        ImageView plane2 = (ImageView)findViewById(R.id.plane2);
-        ImageView plane3 = (ImageView)findViewById(R.id.plane3);
+        plane1 = (ImageView)findViewById(R.id.plane1);
+        plane2 = (ImageView)findViewById(R.id.plane2);
+        plane3 = (ImageView)findViewById(R.id.plane3);
 
         RelativeLayout.LayoutParams lp =
                 new RelativeLayout.LayoutParams(length * 5, length * 5);
@@ -62,11 +65,10 @@ public class GameActivity extends AppCompatActivity {
         plane3.setOnTouchListener(new MovePlaneListener());
 
         spinLeft.setOnClickListener(new LeftSpinListener());
-        spinLeft.setOnClickListener(new RightSpinListener());
+        spinRight.setOnClickListener(new RightSpinListener());
 
         Button start = (Button)findViewById(R.id.button);
         start.setOnClickListener(new StartListener());
-
 
         //initialize
         plane1.setImageResource(R.drawable.plane_up);
@@ -83,6 +85,13 @@ public class GameActivity extends AppCompatActivity {
             int top;
             int right;
             int bottom;
+            if (v.getId()==R.id.plane1)
+                choosenPlane=1;
+            if (v.getId()==R.id.plane2)
+                choosenPlane=2;
+            if (v.getId()==R.id.plane3)
+                choosenPlane=3;
+//            Log.e("choosen plane",""+choosenPlane);
             switch (action) {
                 case MotionEvent.ACTION_DOWN:
                     lastX = (int) event.getRawX();
@@ -127,16 +136,16 @@ public class GameActivity extends AppCompatActivity {
                     top = v.getTop();
                     right = v.getRight();
                     bottom = v.getBottom();
+                    int row=0,col=0;
                     v.layout(length/2+left/length*length, length/2+top/length*length,
                             length/2+right/length*length, length/2+bottom/length*length);
+                    if (player == 1) {
+                        player1.placePlane(choosenPlane - 1, row, col, player1.getDirection(choosenPlane - 1));
+                    }
+                    if (player == 2)
+                        player2.placePlane(choosenPlane-1,row,col,player2.getDirection(choosenPlane-1));
                     break;
             }
-            if (v.getId()==R.id.plane1)
-                choosenPlane=1;
-            if (v.getId()==R.id.plane2)
-                choosenPlane=2;
-            if (v.getId()==R.id.plane3)
-                choosenPlane=3;
         return false;
         }
     }
@@ -183,6 +192,7 @@ public class GameActivity extends AppCompatActivity {
             if(dir>3)//left
                 dir=0;//up
             ImageView plane=null;
+            Log.e("right spin","onclick");
             if (choosenPlane==1)
                 plane = (ImageView)findViewById(R.id.plane1);
             if (choosenPlane==2)
@@ -194,7 +204,19 @@ public class GameActivity extends AppCompatActivity {
 
         }
     }
-    private void resetPlane(){}
+    private void resetPlane(){
+//        pla
+        RelativeLayout.LayoutParams lp =
+                new RelativeLayout.LayoutParams(length * 5, length * 5);
+        lp.leftMargin = length * 12 + length / 2;
+        lp.topMargin = length * 2 + length / 2;
+        plane1.setLayoutParams(lp);
+        plane2.setLayoutParams(lp);
+        plane3.setLayoutParams(lp);
+        plane1.setImageResource(R.drawable.plane_up);
+        plane2.setImageResource(R.drawable.plane_up);
+        plane3.setImageResource(R.drawable.plane_up);
+    }
     class StartListener implements View.OnClickListener{
         @Override
         public void onClick(View v) {

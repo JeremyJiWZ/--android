@@ -128,7 +128,8 @@ class Plane
 
 	Plane()
 	{
-		row = col = d = -1;
+		row = col = -1;
+		d = 0;
 		isPlace=false;
 	}
 	

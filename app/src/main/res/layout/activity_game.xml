@@ -29,7 +29,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/plane1"
-        android:layout_marginLeft="470dp"
+        android:layout_marginLeft="500dp"
         android:layout_marginTop="30dp"
         android:clickable="true"
         />
@@ -53,16 +53,15 @@
         android:layout_height="wrap_content"
         android:background="@drawable/spin_right"
         android:id="@+id/spinRight"
-        android:layout_alignTop="@+id/button"
-        android:layout_alignRight="@+id/plane1"
-        android:layout_alignEnd="@+id/plane1"/>
+        android:layout_alignBottom="@+id/button"
+        android:layout_toLeftOf="@+id/button"
+        />
     <ImageButton
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/spinLeft"
         android:background="@drawable/spin_left"
-        android:layout_alignBottom="@+id/spinRight"
-        android:layout_alignLeft="@+id/spinRight"
-        android:layout_alignStart="@+id/spinRight"
+        android:layout_alignBottom="@+id/button"
+        android:layout_toLeftOf="@+id/spinRight"
         />
 </RelativeLayout>
