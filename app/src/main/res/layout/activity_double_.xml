@@ -20,7 +20,29 @@
         android:id="@+id/box2"
         android:background="@drawable/box_index"
         android:clickable="true"/>
-
-
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/player1"
+        android:background="@drawable/player1"
+        />
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/player2"
+        android:background="@drawable/player2"/>
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/indicator"
+        android:background="@drawable/indicator_right"/>
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/shadow_horizontal"/>
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/shadow_vertical"/>
 
 </RelativeLayout>
