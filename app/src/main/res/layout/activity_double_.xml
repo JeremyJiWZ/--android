@@ -35,14 +35,16 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/indicator"
-        android:background="@drawable/indicator_right"/>
+        />
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/shadow_horizontal"/>
+        android:id="@+id/shadow_horizontal"
+        />
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/shadow_vertical"/>
+        android:id="@+id/shadow_vertical"
+        />
 
 </RelativeLayout>
