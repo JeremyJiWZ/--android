@@ -8,7 +8,18 @@
                 android:paddingBottom="@dimen/activity_vertical_margin"
                 tools:context="wj.airwar.Double_Activity"
     android:background="#00ffaa">
-
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/box1"
+        android:background="@drawable/box_index"
+        android:clickable="true"/>
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/box2"
+        android:background="@drawable/box_index"
+        android:clickable="true"/>
 
 
 
