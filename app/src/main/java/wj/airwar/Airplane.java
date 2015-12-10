@@ -1,5 +1,7 @@
 package wj.airwar;
 
+import android.util.Log;
+
 /**
 * Created by jiwentadashi on 15/11/25.
 */
@@ -44,10 +46,10 @@ public class Airplane
 		unplace(num);
 
 		//out of field
-		if (d==0 && !(row >=3 && row <=9 && col >=2 && col <=7)) return false;
-		if (d==1 && !(row >=2 && row <=7 && col >=0 && col <=6)) return false;
-		if (d==2 && !(row >=0 && row <=6 && col >=2 && col <=7)) return false;
-		if (d==3 && !(row >=2 && row <=7 && col >=3 && col <=9)) return false;
+		if (d==0 && !(row >=0 && row <=6 && col >=2 && col <=7)) return false;
+		if (d==1 && !(row >=2 && row <=7 && col >=3 && col <=9)) return false;
+		if (d==2 && !(row >=3 && row <=9 && col >=2 && col <=7)) return false;
+		if (d==3 && !(row >=2 && row <=7 && col >=0 && col <=6)) return false;
 
 		//collision
 		for (int i=0; i<10; i++)
@@ -144,10 +146,10 @@ public class Airplane
 	}
 
 	static final int SHAPE[][][] = {//new int[4][10][2];
-			{{0, 0}, {-1, 2}, {-1, 1}, {-1, 0}, {-1, -1}, {-1, -2}, {-2, 0}, {-3, 1}, {-3, 0}, {-3, -1}},
-			{{0, 0}, {2, 1}, {1, 1}, {0, 1}, {-1, 1}, {-2, 1}, {0, 2}, {1, 3}, {0, 3}, {-1, 3}},
 			{{0, 0}, {1, -2}, {1, -1}, {1, 0}, {1, 1}, {1, 2}, {2, 0}, {3, -1}, {3, 0}, {3, 1}},
-			{{0, 0}, {-2, -1}, {-1, -1}, {0, -1}, {1, -1}, {2, -1}, {0, -2}, {-1, -3}, {0, -3}, {1, -3}}
+			{{0, 0}, {-2, -1}, {-1, -1}, {0, -1}, {1, -1}, {2, -1}, {0, -2}, {-1, -3}, {0, -3}, {1, -3}},
+			{{0, 0}, {-1, 2}, {-1, 1}, {-1, 0}, {-1, -1}, {-1, -2}, {-2, 0}, {-3, 1}, {-3, 0}, {-3, -1}},
+			{{0, 0}, {2, 1}, {1, 1}, {0, 1}, {-1, 1}, {-2, 1}, {0, 2}, {1, 3}, {0, 3}, {-1, 3}}
 	};
 
 	static class Tran
