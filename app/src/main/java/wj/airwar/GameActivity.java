@@ -144,14 +144,14 @@ public class GameActivity extends AppCompatActivity {
                     bottom = v.getBottom();
                     int row = 0, col = 0;
                     v.layout(length / 2 + left / length * length, length / 2 + top / length * length, length / 2 + right / length * length, length / 2 + bottom / length * length);
-                    row = top/length-2;
+                    row = top/length-1;
                     col = left/length-2;
                     Log.e("row",""+row);
                     Log.e("col",""+col);
                     if (player == 1) {
                         boolean test;//for test
                         test=player1.placePlane(choosenPlane - 1, row, col, player1.getDirection(choosenPlane - 1));
-//                        Log.e("is placed?",""+test);
+                        Log.e("is placed?",""+test);
                     }
                     if (player == 2)
                         player2.placePlane(choosenPlane - 1, row, col, player2.getDirection(choosenPlane - 1));
