@@ -1,5 +1,9 @@
 package wj.airwar;
 
+import android.util.Log;
+
+import java.util.Random;
+
 /**
 * Created by jiwentadashi on 15/11/25.
 */
@@ -73,10 +77,16 @@ public class Airplane
 		}
 	}
 
+	void randomPlace()
+	{
+		new RandomPlace();
+	}
+
 	public boolean isAllPlaced()
 	{
 		return plane[0].isPlace && plane[1].isPlace && plane[2].isPlace;
 	}
+
 	public int getRow(int num)
 	{
 		Tran.outRow(getRowPv(num), plane[num].d);
@@ -108,7 +118,7 @@ public class Airplane
 	public boolean setDirection(int num, int d)
 	{
 		if (plane[num].isPlace)
-			return placePlanePv(num, getRowPv(num), getColPv(num), d);
+			return placePlane(num, getRow(num), getCol(num), d);
 		plane[num].d = d;
 		return false;
 	}
@@ -211,6 +221,30 @@ public class Airplane
 					realCol = col-1;
 					break;
 			}
+		}
+	}
+
+	class RandomPlace
+	{
+		Random rd =new Random();
+		RandomPlace()
+		{
+            if (dfs(0)==false) Log.e("RandomPlace", "Can not find a placement");
+		}
+		boolean dfs(int dep)
+		{
+			if (dep==3) return true;
+			for (int i=0; i<200; i++)
+			{
+				int d = rd.nextInt(4);//random direction
+				int row = rd.nextInt(10);
+				int col = rd.nextInt(10);
+				if (placePlane(dep, row, col, d))
+				{
+					if (true == dfs(dep+1)) return true;
+				}
+			}
+			return false;
 		}
 	}
 }
