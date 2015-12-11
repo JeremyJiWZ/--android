@@ -352,6 +352,10 @@ public class GameActivity extends AppCompatActivity {
             if (player == 2) {
                 if(player2.isAllPlaced()) {
                     Intent intent = new Intent();
+                    Bundle mBundle = new Bundle();
+                    mBundle.putParcelable("player1",player1);
+                    mBundle.putParcelable("player2",player2);
+                    intent.putExtras(mBundle);
                     intent.setClass(GameActivity.this, Double_Activity.class);
                     startActivity(intent);
                     return;
