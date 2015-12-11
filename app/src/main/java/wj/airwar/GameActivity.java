@@ -268,7 +268,9 @@ public class GameActivity extends AppCompatActivity {
     class LeftSpinListener implements ImageButton.OnClickListener {
         @Override
         public void onClick(View v) {
-            int dir = player1.getDirection(choosenPlane - 1);
+            int dir;
+            if (player==1) dir=player1.getDirection(choosenPlane-1);
+            else dir=player2.getDirection(choosenPlane-1);
             dir -= 1;//turn left
             if (dir < 0)//up
                 dir = 3;//left
@@ -291,7 +293,9 @@ public class GameActivity extends AppCompatActivity {
     class RightSpinListener implements ImageButton.OnClickListener {
         @Override
         public void onClick(View v) {
-            int dir = player1.getDirection(choosenPlane - 1);
+            int dir;
+            if (player==1) dir=player1.getDirection(choosenPlane-1);
+            else dir=player2.getDirection(choosenPlane-1);
             dir += 1;//turn right
             if (dir > 3)//left
                 dir = 0;//up
@@ -360,6 +364,7 @@ public class GameActivity extends AppCompatActivity {
                     Intent intent = new Intent();
                     intent.setClass(GameActivity.this, Double_Activity.class);
                     startActivity(intent);
+                    finish();
                     return;
                 }
                 else {

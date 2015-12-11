@@ -25,6 +25,10 @@ public class MainActivity extends AppCompatActivity {
             startActivity(intent);
         }
     }
+    @Override
+    protected void onRestart(){
+        super.onRestart();
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
