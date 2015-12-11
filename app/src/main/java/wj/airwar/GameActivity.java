@@ -21,8 +21,8 @@ public class GameActivity extends AppCompatActivity {
     private int choosenPlane = 0;//1 for plane 1, 2 for plane 2, 3 for plane 3
     private int player = 1; //player 1 or player 2
     private int lastX, lastY;
-    private Airplane player1 = new Airplane();
-    private Airplane player2 = new Airplane();
+    static public Airplane player1 = new Airplane();
+    static public Airplane player2 = new Airplane();
     ImageView plane1;
     ImageView plane2;
     ImageView plane3;
@@ -352,10 +352,6 @@ public class GameActivity extends AppCompatActivity {
             if (player == 2) {
                 if(player2.isAllPlaced()) {
                     Intent intent = new Intent();
-                    Bundle mBundle = new Bundle();
-                    mBundle.putParcelable("player1",player1);
-                    mBundle.putParcelable("player2",player2);
-                    intent.putExtras(mBundle);
                     intent.setClass(GameActivity.this, Double_Activity.class);
                     startActivity(intent);
                     return;

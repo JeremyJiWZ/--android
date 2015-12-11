@@ -1,13 +1,10 @@
 package wj.airwar;
 
-import android.os.Parcel;
-import android.os.Parcelable;
-
 /**
 * Created by jiwentadashi on 15/11/25.
 */
 
-public class Airplane implements Parcelable
+public class Airplane
 {
 	Plane[] plane = new Plane[3];
 	int alive;
@@ -152,16 +149,6 @@ public class Airplane implements Parcelable
 			{{0, 0}, {-1, 2}, {-1, 1}, {-1, 0}, {-1, -1}, {-1, -2}, {-2, 0}, {-3, 1}, {-3, 0}, {-3, -1}},
 			{{0, 0}, {2, 1}, {1, 1}, {0, 1}, {-1, 1}, {-2, 1}, {0, 2}, {1, 3}, {0, 3}, {-1, 3}}
 	};
-
-	@Override
-	public int describeContents() {
-		return 0;
-	}
-
-	@Override
-	public void writeToParcel(Parcel dest, int flags) {
-
-	}
 
 	static class Tran
 	{
