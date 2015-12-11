@@ -200,6 +200,7 @@ public class GameActivity extends AppCompatActivity {
                     top = v.getTop() + dy;
                     right = v.getRight() + dx;
                     bottom = v.getBottom() + dy;
+
                     //test
 //                    Log.e("Notice:x",event.getRawX()+"\n");
 //                    Log.e("Notice:y",event.getRawY()+"\n");
@@ -231,11 +232,16 @@ public class GameActivity extends AppCompatActivity {
                     right = v.getRight();
                     bottom = v.getBottom();
                     int row = 0, col = 0;
-                    v.layout(length / 2 + left / length * length, length / 2 + top / length * length, length / 2 + right / length * length, length / 2 + bottom / length * length);
                     row = top/length-2;
-                    col = left/length-2;
-//                    Log.e("row",""+row);
-//                    Log.e("col",""+col);
+                    col = (int) (left/length-2);
+                    //校正
+                    v.layout((int) ((col+2)*length+0.65*length), (int) ((row+2)*length+0.65*length),
+                            (int) ((col+7)*length+0.65*length), (int) ((row+7)*length+0.65*length));
+//                    v.layout(length / 2 + left / length * length, length / 2 + top / length * length, length / 2 + right / length * length, length / 2 + bottom / length * length);
+//                    row = top/length-2;
+//                    col = left/length-2;
+                    Log.e("row",""+row);
+                    Log.e("col",""+col);
                     if (player == 1) {
                         boolean test;//for test
                         test=player1.placePlane(choosenPlane - 1, row, col, player1.getDirection(choosenPlane - 1));
