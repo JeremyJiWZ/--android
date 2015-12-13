@@ -21,9 +21,9 @@ public class GameActivity extends AppCompatActivity {
     private int choosenPlane = 0;//1 for plane 1, 2 for plane 2, 3 for plane 3
     private int player = 1; //player 1 or player 2
     private int lastX, lastY;
-    private RelativeLayout.LayoutParams lp1,lp2,lp3;//layout params for plane1,2,3
-    static public Airplane player1 ;
-    static public Airplane player2 ;
+    private RelativeLayout.LayoutParams lp1, lp2, lp3;//layout params for plane1,2,3
+    static public Airplane player1;
+    static public Airplane player2;
     ImageView plane1;
     ImageView plane2;
     ImageView plane3;
@@ -43,8 +43,8 @@ public class GameActivity extends AppCompatActivity {
 //        Log.i("test", "screenHeight = " + screenHeight);
 //        Log.i("test", "length = " + length);
 
-        player1=new Airplane();
-        player2=new Airplane();
+        player1 = new Airplane();
+        player2 = new Airplane();
 
         ImageButton spinLeft = (ImageButton) findViewById(R.id.spinLeft);
         ImageButton spinRight = (ImageButton) findViewById(R.id.spinRight);
@@ -73,6 +73,9 @@ public class GameActivity extends AppCompatActivity {
         plane2.setOnTouchListener(new MovePlaneListener());
         plane3.setOnTouchListener(new MovePlaneListener());
 
+//        RelativeLayout.LayoutParams spin_lp = new RelativeLayout.LayoutParams(length*2,length*2);
+//        spinLeft.setLayoutParams(spin_lp);
+//        spinRight.setLayoutParams(spin_lp);
         spinLeft.setOnClickListener(new LeftSpinListener());
         spinRight.setOnClickListener(new RightSpinListener());
 
@@ -86,97 +89,118 @@ public class GameActivity extends AppCompatActivity {
 
         createBox();
     }
-    private void createBox(){
+
+    private void createBox() {
         //放置棋盘，做好布局
-        ImageView box = (ImageView)findViewById(R.id.box);
-        RelativeLayout.LayoutParams bp = new RelativeLayout.LayoutParams(length*10,length*10);
-        bp.leftMargin = length*2;
-        bp.topMargin = length*2;
+        ImageView box = (ImageView) findViewById(R.id.box);
+        RelativeLayout.LayoutParams bp = new RelativeLayout.LayoutParams(length * 10, length * 10);
+        bp.leftMargin = length * 2;
+        bp.topMargin = length * 2;
         box.setLayoutParams(bp);
         //art number 行
-        ImageView one = (ImageView)findViewById(R.id.one);
-        ImageView two = (ImageView)findViewById(R.id.two);
-        ImageView three = (ImageView)findViewById(R.id.three);
-        ImageView four = (ImageView)findViewById(R.id.four);
-        ImageView five = (ImageView)findViewById(R.id.five);
-        ImageView six = (ImageView)findViewById(R.id.six);
-        ImageView seven = (ImageView)findViewById(R.id.seven);
-        ImageView eight = (ImageView)findViewById(R.id.eight);
-        ImageView nine = (ImageView)findViewById(R.id.nine);
-        ImageView ten = (ImageView)findViewById(R.id.ten);
+        ImageView one = (ImageView) findViewById(R.id.one);
+        ImageView two = (ImageView) findViewById(R.id.two);
+        ImageView three = (ImageView) findViewById(R.id.three);
+        ImageView four = (ImageView) findViewById(R.id.four);
+        ImageView five = (ImageView) findViewById(R.id.five);
+        ImageView six = (ImageView) findViewById(R.id.six);
+        ImageView seven = (ImageView) findViewById(R.id.seven);
+        ImageView eight = (ImageView) findViewById(R.id.eight);
+        ImageView nine = (ImageView) findViewById(R.id.nine);
+        ImageView ten = (ImageView) findViewById(R.id.ten);
 
-        RelativeLayout.LayoutParams ly_1 = new RelativeLayout.LayoutParams(length,length);
-        ly_1.leftMargin = length*2; ly_1.topMargin=length;
+        RelativeLayout.LayoutParams ly_1 = new RelativeLayout.LayoutParams(length, length);
+        ly_1.leftMargin = length * 2;
+        ly_1.topMargin = length;
         one.setLayoutParams(ly_1);
-        RelativeLayout.LayoutParams ly_2 = new RelativeLayout.LayoutParams(length,length);
-        ly_2.leftMargin = length*3; ly_2.topMargin=length;
+        RelativeLayout.LayoutParams ly_2 = new RelativeLayout.LayoutParams(length, length);
+        ly_2.leftMargin = length * 3;
+        ly_2.topMargin = length;
         two.setLayoutParams(ly_2);
-        RelativeLayout.LayoutParams ly_3 = new RelativeLayout.LayoutParams(length,length);
-        ly_3.leftMargin = length*4; ly_3.topMargin=length;
+        RelativeLayout.LayoutParams ly_3 = new RelativeLayout.LayoutParams(length, length);
+        ly_3.leftMargin = length * 4;
+        ly_3.topMargin = length;
         three.setLayoutParams(ly_3);
-        RelativeLayout.LayoutParams ly_4 = new RelativeLayout.LayoutParams(length,length);
-        ly_4.leftMargin = length*5; ly_4.topMargin=length;
+        RelativeLayout.LayoutParams ly_4 = new RelativeLayout.LayoutParams(length, length);
+        ly_4.leftMargin = length * 5;
+        ly_4.topMargin = length;
         four.setLayoutParams(ly_4);
-        RelativeLayout.LayoutParams ly_5 = new RelativeLayout.LayoutParams(length,length);
-        ly_5.leftMargin = length*6; ly_5.topMargin=length;
+        RelativeLayout.LayoutParams ly_5 = new RelativeLayout.LayoutParams(length, length);
+        ly_5.leftMargin = length * 6;
+        ly_5.topMargin = length;
         five.setLayoutParams(ly_5);
-        RelativeLayout.LayoutParams ly_6 = new RelativeLayout.LayoutParams(length,length);
-        ly_6.leftMargin = length*7; ly_6.topMargin=length;
+        RelativeLayout.LayoutParams ly_6 = new RelativeLayout.LayoutParams(length, length);
+        ly_6.leftMargin = length * 7;
+        ly_6.topMargin = length;
         six.setLayoutParams(ly_6);
-        RelativeLayout.LayoutParams ly_7 = new RelativeLayout.LayoutParams(length,length);
-        ly_7.leftMargin = length*8; ly_7.topMargin=length;
+        RelativeLayout.LayoutParams ly_7 = new RelativeLayout.LayoutParams(length, length);
+        ly_7.leftMargin = length * 8;
+        ly_7.topMargin = length;
         seven.setLayoutParams(ly_7);
-        RelativeLayout.LayoutParams ly_8 = new RelativeLayout.LayoutParams(length,length);
-        ly_8.leftMargin = length*9; ly_8.topMargin=length;
+        RelativeLayout.LayoutParams ly_8 = new RelativeLayout.LayoutParams(length, length);
+        ly_8.leftMargin = length * 9;
+        ly_8.topMargin = length;
         eight.setLayoutParams(ly_8);
-        RelativeLayout.LayoutParams ly_9 = new RelativeLayout.LayoutParams(length,length);
-        ly_9.leftMargin = length*10; ly_9.topMargin=length;
+        RelativeLayout.LayoutParams ly_9 = new RelativeLayout.LayoutParams(length, length);
+        ly_9.leftMargin = length * 10;
+        ly_9.topMargin = length;
         nine.setLayoutParams(ly_9);
-        RelativeLayout.LayoutParams ly_10 = new RelativeLayout.LayoutParams(length,length);
-        ly_10.leftMargin = length*11; ly_10.topMargin=length;
+        RelativeLayout.LayoutParams ly_10 = new RelativeLayout.LayoutParams(length, length);
+        ly_10.leftMargin = length * 11;
+        ly_10.topMargin = length;
         ten.setLayoutParams(ly_10);
 
         //art number 列
-        ImageView one_col = (ImageView)findViewById(R.id.one_col);
-        ImageView two_col = (ImageView)findViewById(R.id.two_col);
-        ImageView three_col = (ImageView)findViewById(R.id.three_col);
-        ImageView four_col = (ImageView)findViewById(R.id.four_col);
-        ImageView five_col = (ImageView)findViewById(R.id.five_col);
-        ImageView six_col = (ImageView)findViewById(R.id.six_col);
-        ImageView seven_col = (ImageView)findViewById(R.id.seven_col);
-        ImageView eight_col = (ImageView)findViewById(R.id.eight_col);
-        ImageView nine_col = (ImageView)findViewById(R.id.nine_col);
-        ImageView ten_col = (ImageView)findViewById(R.id.ten_col);
+        ImageView one_col = (ImageView) findViewById(R.id.one_col);
+        ImageView two_col = (ImageView) findViewById(R.id.two_col);
+        ImageView three_col = (ImageView) findViewById(R.id.three_col);
+        ImageView four_col = (ImageView) findViewById(R.id.four_col);
+        ImageView five_col = (ImageView) findViewById(R.id.five_col);
+        ImageView six_col = (ImageView) findViewById(R.id.six_col);
+        ImageView seven_col = (ImageView) findViewById(R.id.seven_col);
+        ImageView eight_col = (ImageView) findViewById(R.id.eight_col);
+        ImageView nine_col = (ImageView) findViewById(R.id.nine_col);
+        ImageView ten_col = (ImageView) findViewById(R.id.ten_col);
 
-        RelativeLayout.LayoutParams ly_1_col = new RelativeLayout.LayoutParams(length,length);
-        ly_1_col.leftMargin = length; ly_1_col.topMargin=length*2;
+        RelativeLayout.LayoutParams ly_1_col = new RelativeLayout.LayoutParams(length, length);
+        ly_1_col.leftMargin = length;
+        ly_1_col.topMargin = length * 2;
         one_col.setLayoutParams(ly_1_col);
-        RelativeLayout.LayoutParams ly_2_col = new RelativeLayout.LayoutParams(length,length);
-        ly_2_col.leftMargin = length; ly_2_col.topMargin=length*3;
+        RelativeLayout.LayoutParams ly_2_col = new RelativeLayout.LayoutParams(length, length);
+        ly_2_col.leftMargin = length;
+        ly_2_col.topMargin = length * 3;
         two_col.setLayoutParams(ly_2_col);
-        RelativeLayout.LayoutParams ly_3_col = new RelativeLayout.LayoutParams(length,length);
-        ly_3_col.leftMargin = length; ly_3_col.topMargin=length*4;
+        RelativeLayout.LayoutParams ly_3_col = new RelativeLayout.LayoutParams(length, length);
+        ly_3_col.leftMargin = length;
+        ly_3_col.topMargin = length * 4;
         three_col.setLayoutParams(ly_3_col);
-        RelativeLayout.LayoutParams ly_4_col = new RelativeLayout.LayoutParams(length,length);
-        ly_4_col.leftMargin = length; ly_4_col.topMargin=length*5;
+        RelativeLayout.LayoutParams ly_4_col = new RelativeLayout.LayoutParams(length, length);
+        ly_4_col.leftMargin = length;
+        ly_4_col.topMargin = length * 5;
         four_col.setLayoutParams(ly_4_col);
-        RelativeLayout.LayoutParams ly_5_col = new RelativeLayout.LayoutParams(length,length);
-        ly_5_col.leftMargin = length; ly_5_col.topMargin=length*6;
+        RelativeLayout.LayoutParams ly_5_col = new RelativeLayout.LayoutParams(length, length);
+        ly_5_col.leftMargin = length;
+        ly_5_col.topMargin = length * 6;
         five_col.setLayoutParams(ly_5_col);
-        RelativeLayout.LayoutParams ly_6_col = new RelativeLayout.LayoutParams(length,length);
-        ly_6_col.leftMargin = length; ly_6_col.topMargin=length*7;
+        RelativeLayout.LayoutParams ly_6_col = new RelativeLayout.LayoutParams(length, length);
+        ly_6_col.leftMargin = length;
+        ly_6_col.topMargin = length * 7;
         six_col.setLayoutParams(ly_6_col);
-        RelativeLayout.LayoutParams ly_7_col = new RelativeLayout.LayoutParams(length,length);
-        ly_7_col.leftMargin = length; ly_7_col.topMargin=length*8;
+        RelativeLayout.LayoutParams ly_7_col = new RelativeLayout.LayoutParams(length, length);
+        ly_7_col.leftMargin = length;
+        ly_7_col.topMargin = length * 8;
         seven_col.setLayoutParams(ly_7_col);
-        RelativeLayout.LayoutParams ly_8_col = new RelativeLayout.LayoutParams(length,length);
-        ly_8_col.leftMargin = length; ly_8_col.topMargin=length*9;
+        RelativeLayout.LayoutParams ly_8_col = new RelativeLayout.LayoutParams(length, length);
+        ly_8_col.leftMargin = length;
+        ly_8_col.topMargin = length * 9;
         eight_col.setLayoutParams(ly_8_col);
-        RelativeLayout.LayoutParams ly_9_col = new RelativeLayout.LayoutParams(length,length);
-        ly_9_col.leftMargin = length; ly_9_col.topMargin=length*10;
+        RelativeLayout.LayoutParams ly_9_col = new RelativeLayout.LayoutParams(length, length);
+        ly_9_col.leftMargin = length;
+        ly_9_col.topMargin = length * 10;
         nine_col.setLayoutParams(ly_9_col);
-        RelativeLayout.LayoutParams ly_10_col = new RelativeLayout.LayoutParams(length,length);
-        ly_10_col.leftMargin = length; ly_10_col.topMargin=length*11;
+        RelativeLayout.LayoutParams ly_10_col = new RelativeLayout.LayoutParams(length, length);
+        ly_10_col.leftMargin = length;
+        ly_10_col.topMargin = length * 11;
         ten_col.setLayoutParams(ly_10_col);
 
     }
@@ -234,25 +258,29 @@ public class GameActivity extends AppCompatActivity {
                 case MotionEvent.ACTION_UP:
                     left = v.getLeft();
                     top = v.getTop();
-                    int row = 0, col = 0;
-                    row = top/length-2;
-                    col = (int) (left/length-2);
+                    int row , col;
                     //校正
-                    setPlane(choosenPlane,row,col);
+                    row = top / length - 2;
+                    col = left / length - 2;
                     //for test
-                    Log.e("row",""+row);
-                    Log.e("col",""+col);
+                    Log.e("row", "" + row);
+                    Log.e("col", "" + col);
 
                     if (player == 1) {
-                        boolean test;//for test
-                        test=player1.placePlane(choosenPlane - 1, row, col, player1.getDirection(choosenPlane - 1));
-                        Log.e("is placed?",""+test);
-                        Log.e("d", ""+player1.getDirection(choosenPlane-1));
+                        boolean isPlace;//for test
+                        isPlace = player1.placePlane(choosenPlane - 1, row, col, player1.getDirection(choosenPlane - 1));
+                        if (!isPlace) resetPlane(choosenPlane);
+                        else setPlane(choosenPlane, row, col);
+                        Log.e("is placed?", "" + isPlace);
+                        Log.e("d", "" + player1.getDirection(choosenPlane - 1));
                     }
                     if (player == 2) {
-                        player2.placePlane(choosenPlane - 1, row, col, player2.getDirection(choosenPlane - 1));
+                        boolean isPlace;//for test
+                        isPlace = player2.placePlane(choosenPlane - 1, row, col, player2.getDirection(choosenPlane - 1));
+                        if (!isPlace) resetPlane(choosenPlane );
+                        else setPlane(choosenPlane, row, col);
 //                        Log.e("is placed?", "" + test);
-                        Log.e("d", "" + player1.getDirection(choosenPlane - 1));
+//                        Log.e("d", "" + player1.getDirection(choosenPlane - 1));
                     }
                     break;
             }
@@ -273,9 +301,10 @@ public class GameActivity extends AppCompatActivity {
     class LeftSpinListener implements ImageButton.OnClickListener {
         @Override
         public void onClick(View v) {
+            if (choosenPlane <= 0 || choosenPlane > 3) return;//nothing chosen
             int dir;
-            if (player==1) dir=player1.getDirection(choosenPlane-1);
-            else dir=player2.getDirection(choosenPlane-1);
+            if (player == 1) dir = player1.getDirection(choosenPlane - 1);
+            else dir = player2.getDirection(choosenPlane - 1);
             dir -= 1;//turn left
             if (dir < 0)//up
                 dir = 3;//left
@@ -285,15 +314,17 @@ public class GameActivity extends AppCompatActivity {
             if (choosenPlane == 3) plane = (ImageView) findViewById(R.id.plane3);
             if (plane != null) {
                 if (player == 1) {
-                    boolean test;
-                    test = player1.setDirection(choosenPlane-1,dir);
-                    if (test==false) {
-                        plane1.layout(2*length,14*length,7*length,19*length);
-                        return;
+                    boolean isPlace;
+                    isPlace = player1.setDirection(choosenPlane - 1, dir);
+                    if (!isPlace) {
+                        resetPlane(choosenPlane);
                     }
-                }
-                else if (player == 2) {
-                    player2.setDirection(choosenPlane-1,dir);
+                } else if (player == 2) {
+                    boolean isPlace;
+                    isPlace = player2.setDirection(choosenPlane - 1, dir);
+                    if (!isPlace) {
+                        resetPlane(choosenPlane);
+                    }
                 }
                 setDir(plane, dir);
             }
@@ -303,9 +334,10 @@ public class GameActivity extends AppCompatActivity {
     class RightSpinListener implements ImageButton.OnClickListener {
         @Override
         public void onClick(View v) {
+            if (choosenPlane <= 0 || choosenPlane > 3) return;//nothing chosen
             int dir;
-            if (player==1) dir=player1.getDirection(choosenPlane-1);
-            else dir=player2.getDirection(choosenPlane-1);
+            if (player == 1) dir = player1.getDirection(choosenPlane - 1);
+            else dir = player2.getDirection(choosenPlane - 1);
             dir += 1;//turn right
             if (dir > 3)//left
                 dir = 0;//up
@@ -316,11 +348,18 @@ public class GameActivity extends AppCompatActivity {
             if (choosenPlane == 3) plane = (ImageView) findViewById(R.id.plane3);
             if (plane != null) {
                 if (player == 1) {
-                    Log.e("set dir",""+dir);
-                    player1.setDirection(choosenPlane-1,dir);
-                }
-                else if (player == 2) {
-                    player2.setDirection(choosenPlane-1,dir);
+//                    Log.e("set dir",""+dir);
+                    boolean isPlace;
+                    isPlace = player1.setDirection(choosenPlane - 1, dir);
+                    if (!isPlace) {
+                        resetPlane(choosenPlane);
+                    }
+                } else if (player == 2) {
+                    boolean isPlace;
+                    isPlace = player2.setDirection(choosenPlane - 1, dir);
+                    if (!isPlace) {
+                        resetPlane(choosenPlane);
+                    }
                 }
                 //show the rotate plane
                 setDir(plane, dir);
@@ -333,36 +372,40 @@ public class GameActivity extends AppCompatActivity {
         resetPlane(1);
         resetPlane(2);
         resetPlane(3);
+        plane1.setImageResource(R.drawable.plane_up);
+        plane2.setImageResource(R.drawable.plane_up);
+        plane3.setImageResource(R.drawable.plane_up);
     }
-    private void resetPlane(int num){
-        if (num==1){
-            lp1.leftMargin= length * 12 + length / 2;
-            lp1.topMargin=length * 2 + length / 2;
-            plane1.setImageResource(R.drawable.plane_up);
-        }
-        else if (num==2){
-            lp2.leftMargin= length * 12 + length / 2;
-            lp2.topMargin=length * 2 + length / 2;
-            plane2.setImageResource(R.drawable.plane_up);
-        }
-        else if(num==3) {
+
+    private void resetPlane(int num) {
+        if (num == 1) {
+            lp1.leftMargin = length * 12 + length / 2;
+            lp1.topMargin = length * 2 + length / 2;
+            plane1.setLayoutParams(lp1);
+        } else if (num == 2) {
+            lp2.leftMargin = length * 12 + length / 2;
+            lp2.topMargin = length * 2 + length / 2;
+            plane2.setLayoutParams(lp2);
+        } else if (num == 3) {
             lp3.leftMargin = length * 12 + length / 2;
             lp3.topMargin = length * 2 + length / 2;
-            plane3.setImageResource(R.drawable.plane_up);
+            plane3.setLayoutParams(lp3);
         }
     }
-    private void setPlane(int num, int row, int col){//paint the plane in the panel
-        if (num==1){
-            lp1.leftMargin=(int) ((col+2)*length+0.65*length);
-            lp1.topMargin=(int) ((row+2)*length+0.65*length);
-        }
-        else if(num==2){
-            lp2.leftMargin=(int) ((col+2)*length+0.65*length);
-            lp2.topMargin=(int) ((row+2)*length+0.65*length);
-        }
-        else if(num==3){
-            lp3.leftMargin=(int) ((col+2)*length+0.65*length);
-            lp3.topMargin=(int) ((row+2)*length+0.65*length);
+
+    private void setPlane(int num, int row, int col) {//paint the plane in the panel
+        if (num == 1) {
+            lp1.leftMargin = (col + 2) * length;
+            lp1.topMargin = (row + 2) * length;
+            plane1.setLayoutParams(lp1);
+        } else if (num == 2) {
+            lp2.leftMargin = (col + 2) * length;
+            lp2.topMargin = (row + 2) * length;
+            plane2.setLayoutParams(lp2);
+        } else if (num == 3) {
+            lp3.leftMargin = (col + 2) * length;
+            lp3.topMargin = (row + 2) * length;
+            plane3.setLayoutParams(lp3);
         }
     }
 
@@ -376,7 +419,7 @@ public class GameActivity extends AppCompatActivity {
                     resetPlanes();
                     TextView textView = (TextView) findViewById(R.id.player);
                     textView.setText("Player2");
-                    TextView tips = (TextView)findViewById(R.id.tips);
+                    TextView tips = (TextView) findViewById(R.id.tips);
                     tips.setText("请交给玩家2摆放");
                     return;
                 }
@@ -390,20 +433,19 @@ public class GameActivity extends AppCompatActivity {
                     //set neutral button
                     builder.setNeutralButton("好的", new DialogInterface.OnClickListener() {
                         @Override
-                        public void onClick(DialogInterface dialog, int which) {}
+                        public void onClick(DialogInterface dialog, int which) {
+                        }
                     });
                     builder.show();
                 }
             }
             if (player == 2) {
-                if(player2.isAllPlaced()) {
+                if (player2.isAllPlaced()) {
                     Intent intent = new Intent();
                     intent.setClass(GameActivity.this, Double_Activity.class);
                     startActivity(intent);
                     finish();
-                    return;
-                }
-                else {
+                } else {
                     AlertDialog.Builder builder = new AlertDialog.Builder(GameActivity.this);
                     //set title
                     builder.setTitle("提示");
@@ -412,7 +454,8 @@ public class GameActivity extends AppCompatActivity {
                     //set neutral button
                     builder.setNeutralButton("好的", new DialogInterface.OnClickListener() {
                         @Override
-                        public void onClick(DialogInterface dialog, int which) {}
+                        public void onClick(DialogInterface dialog, int which) {
+                        }
                     });
                     builder.show();
                 }
