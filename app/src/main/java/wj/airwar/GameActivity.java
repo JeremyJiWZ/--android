@@ -21,12 +21,14 @@ public class GameActivity extends AppCompatActivity {
     private int choosenPlane = 0;//1 for plane 1, 2 for plane 2, 3 for plane 3
     private int player = 1; //player 1 or player 2
     private int lastX, lastY;
-    static public Airplane player1 = new Airplane();
-    static public Airplane player2 = new Airplane();
+    private RelativeLayout.LayoutParams lp1,lp2,lp3;//layout params for plane1,2,3
+    static public Airplane player1 ;
+    static public Airplane player2 ;
     ImageView plane1;
     ImageView plane2;
     ImageView plane3;
     static public int screenWidth, screenHeight, length;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,6 +43,9 @@ public class GameActivity extends AppCompatActivity {
 //        Log.i("test", "screenHeight = " + screenHeight);
 //        Log.i("test", "length = " + length);
 
+        player1=new Airplane();
+        player2=new Airplane();
+
         ImageButton spinLeft = (ImageButton) findViewById(R.id.spinLeft);
         ImageButton spinRight = (ImageButton) findViewById(R.id.spinRight);
 
@@ -48,12 +53,14 @@ public class GameActivity extends AppCompatActivity {
         plane2 = (ImageView) findViewById(R.id.plane2);
         plane3 = (ImageView) findViewById(R.id.plane3);
 
-        RelativeLayout.LayoutParams lp = new RelativeLayout.LayoutParams(length * 5, length * 5);
-        lp.leftMargin = length * 12 + length / 2;
-        lp.topMargin = length * 2 + length / 2;
-        plane1.setLayoutParams(lp);
-        plane2.setLayoutParams(lp);
-        plane3.setLayoutParams(lp);
+        lp1 = new RelativeLayout.LayoutParams(length * 5, length * 5);
+        lp2 = new RelativeLayout.LayoutParams(length * 5, length * 5);
+        lp3 = new RelativeLayout.LayoutParams(length * 5, length * 5);
+        lp1.leftMargin = lp2.leftMargin = lp3.leftMargin = length * 12 + length / 2;
+        lp1.topMargin = lp2.topMargin = lp3.topMargin = length * 2 + length / 2;
+        plane1.setLayoutParams(lp1);
+        plane2.setLayoutParams(lp2);
+        plane3.setLayoutParams(lp3);
 //
 //        plane1.setX(length * 12 + length / 2);
 //        plane1.setY(length * 2 + length / 2);
@@ -242,13 +249,18 @@ public class GameActivity extends AppCompatActivity {
 //                    col = left/length-2;
                     Log.e("row",""+row);
                     Log.e("col",""+col);
+
                     if (player == 1) {
                         boolean test;//for test
                         test=player1.placePlane(choosenPlane - 1, row, col, player1.getDirection(choosenPlane - 1));
                         Log.e("is placed?",""+test);
+                        Log.e("d", ""+player1.getDirection(choosenPlane-1));
                     }
-                    if (player == 2)
+                    if (player == 2) {
                         player2.placePlane(choosenPlane - 1, row, col, player2.getDirection(choosenPlane - 1));
+//                        Log.e("is placed?", "" + test);
+                        Log.e("d", "" + player1.getDirection(choosenPlane - 1));
+                    }
                     break;
             }
             return false;
@@ -280,7 +292,12 @@ public class GameActivity extends AppCompatActivity {
             if (choosenPlane == 3) plane = (ImageView) findViewById(R.id.plane3);
             if (plane != null) {
                 if (player == 1) {
-                    player1.setDirection(choosenPlane-1,dir);
+                    boolean test;
+                    test = player1.setDirection(choosenPlane-1,dir);
+                    if (test==false) {
+                        plane1.layout(2*length,14*length,7*length,19*length);
+                        return;
+                    }
                 }
                 else if (player == 2) {
                     player2.setDirection(choosenPlane-1,dir);
@@ -306,6 +323,7 @@ public class GameActivity extends AppCompatActivity {
             if (choosenPlane == 3) plane = (ImageView) findViewById(R.id.plane3);
             if (plane != null) {
                 if (player == 1) {
+                    Log.e("set dir",""+dir);
                     player1.setDirection(choosenPlane-1,dir);
                 }
                 else if (player == 2) {
@@ -328,6 +346,9 @@ public class GameActivity extends AppCompatActivity {
         plane1.setImageResource(R.drawable.plane_up);
         plane2.setImageResource(R.drawable.plane_up);
         plane3.setImageResource(R.drawable.plane_up);
+    }
+    private void setPlane(int num, int row, int col){
+
     }
 
     class StartListener implements View.OnClickListener {

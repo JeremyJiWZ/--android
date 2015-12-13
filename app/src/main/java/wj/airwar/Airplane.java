@@ -46,6 +46,7 @@ public class Airplane
 	{
 		//is re-place
 		unplace(num);
+		plane[num].d=d;
 
 		//out of field
 		if (d==0 && !(row >=0 && row <=6 && col >=2 && col <=7)) return false;
