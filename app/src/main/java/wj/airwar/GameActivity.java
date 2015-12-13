@@ -197,8 +197,6 @@ public class GameActivity extends AppCompatActivity {
                 case MotionEvent.ACTION_DOWN:
                     lastX = (int) event.getRawX();
                     lastY = (int) event.getRawY();
-//                    Log.e("Notice:x",lastX+"\n");
-//                    Log.e("Notice:y",lastY+"\n");
                     break;
                 case MotionEvent.ACTION_MOVE:
                     int dx = (int) event.getRawX() - lastX;
@@ -236,17 +234,12 @@ public class GameActivity extends AppCompatActivity {
                 case MotionEvent.ACTION_UP:
                     left = v.getLeft();
                     top = v.getTop();
-                    right = v.getRight();
-                    bottom = v.getBottom();
                     int row = 0, col = 0;
                     row = top/length-2;
                     col = (int) (left/length-2);
                     //校正
-                    v.layout((int) ((col+2)*length+0.65*length), (int) ((row+2)*length+0.65*length),
-                            (int) ((col+7)*length+0.65*length), (int) ((row+7)*length+0.65*length));
-//                    v.layout(length / 2 + left / length * length, length / 2 + top / length * length, length / 2 + right / length * length, length / 2 + bottom / length * length);
-//                    row = top/length-2;
-//                    col = left/length-2;
+                    setPlane(choosenPlane,row,col);
+                    //for test
                     Log.e("row",""+row);
                     Log.e("col",""+col);
 
@@ -335,20 +328,42 @@ public class GameActivity extends AppCompatActivity {
         }
     }
 
-    private void resetPlane() {
+    private void resetPlanes() {
         //reset the plane  for player 2 to get start
-        RelativeLayout.LayoutParams lp = new RelativeLayout.LayoutParams(length * 5, length * 5);
-        lp.leftMargin = length * 12 + length / 2;
-        lp.topMargin = length * 2 + length / 2;
-        plane1.setLayoutParams(lp);
-        plane2.setLayoutParams(lp);
-        plane3.setLayoutParams(lp);
-        plane1.setImageResource(R.drawable.plane_up);
-        plane2.setImageResource(R.drawable.plane_up);
-        plane3.setImageResource(R.drawable.plane_up);
+        resetPlane(1);
+        resetPlane(2);
+        resetPlane(3);
     }
-    private void setPlane(int num, int row, int col){
-
+    private void resetPlane(int num){
+        if (num==1){
+            lp1.leftMargin= length * 12 + length / 2;
+            lp1.topMargin=length * 2 + length / 2;
+            plane1.setImageResource(R.drawable.plane_up);
+        }
+        else if (num==2){
+            lp2.leftMargin= length * 12 + length / 2;
+            lp2.topMargin=length * 2 + length / 2;
+            plane2.setImageResource(R.drawable.plane_up);
+        }
+        else if(num==3) {
+            lp3.leftMargin = length * 12 + length / 2;
+            lp3.topMargin = length * 2 + length / 2;
+            plane3.setImageResource(R.drawable.plane_up);
+        }
+    }
+    private void setPlane(int num, int row, int col){//paint the plane in the panel
+        if (num==1){
+            lp1.leftMargin=(int) ((col+2)*length+0.65*length);
+            lp1.topMargin=(int) ((row+2)*length+0.65*length);
+        }
+        else if(num==2){
+            lp2.leftMargin=(int) ((col+2)*length+0.65*length);
+            lp2.topMargin=(int) ((row+2)*length+0.65*length);
+        }
+        else if(num==3){
+            lp3.leftMargin=(int) ((col+2)*length+0.65*length);
+            lp3.topMargin=(int) ((row+2)*length+0.65*length);
+        }
     }
 
     class StartListener implements View.OnClickListener {
@@ -358,7 +373,7 @@ public class GameActivity extends AppCompatActivity {
                 //if all placed, move on
                 if (player1.isAllPlaced()) {
                     player = 2;
-                    resetPlane();
+                    resetPlanes();
                     TextView textView = (TextView) findViewById(R.id.player);
                     textView.setText("Player2");
                     TextView tips = (TextView)findViewById(R.id.tips);
