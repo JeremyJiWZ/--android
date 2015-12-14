@@ -84,6 +84,13 @@
         android:layout_alignBottom="@+id/button"
         android:layout_toLeftOf="@+id/spinRight"
         />
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/setting"
+        android:id="@+id/auto"
+        android:layout_toLeftOf="@id/spinLeft"
+        android:layout_alignBottom="@+id/button"/>
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

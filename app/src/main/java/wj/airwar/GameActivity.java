@@ -7,7 +7,6 @@ import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.DisplayMetrics;
-import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
@@ -48,6 +47,7 @@ public class GameActivity extends AppCompatActivity {
 
         ImageButton spinLeft = (ImageButton) findViewById(R.id.spinLeft);
         ImageButton spinRight = (ImageButton) findViewById(R.id.spinRight);
+        ImageButton auto = (ImageButton)findViewById(R.id.auto);
 
         plane1 = (ImageView) findViewById(R.id.plane1);
         plane2 = (ImageView) findViewById(R.id.plane2);
@@ -78,6 +78,7 @@ public class GameActivity extends AppCompatActivity {
 //        spinRight.setLayoutParams(spin_lp);
         spinLeft.setOnClickListener(new LeftSpinListener());
         spinRight.setOnClickListener(new RightSpinListener());
+        auto.setOnClickListener(new AutoPlaceListener());
 
         Button start = (Button) findViewById(R.id.button);
         start.setOnClickListener(new StartListener());
@@ -258,26 +259,26 @@ public class GameActivity extends AppCompatActivity {
                 case MotionEvent.ACTION_UP:
                     left = v.getLeft();
                     top = v.getTop();
-                    int row , col;
+                    int row, col;
                     //校正
                     row = top / length - 2;
                     col = left / length - 2;
                     //for test
-                    Log.e("row", "" + row);
-                    Log.e("col", "" + col);
+//                    Log.e("row", "" + row);
+//                    Log.e("col", "" + col);
 
                     if (player == 1) {
                         boolean isPlace;//for test
                         isPlace = player1.placePlane(choosenPlane - 1, row, col, player1.getDirection(choosenPlane - 1));
                         if (!isPlace) resetPlane(choosenPlane);
                         else setPlane(choosenPlane, row, col);
-                        Log.e("is placed?", "" + isPlace);
-                        Log.e("d", "" + player1.getDirection(choosenPlane - 1));
+//                        Log.e("is placed?", "" + isPlace);
+//                        Log.e("d", "" + player1.getDirection(choosenPlane - 1));
                     }
                     if (player == 2) {
                         boolean isPlace;//for test
                         isPlace = player2.placePlane(choosenPlane - 1, row, col, player2.getDirection(choosenPlane - 1));
-                        if (!isPlace) resetPlane(choosenPlane );
+                        if (!isPlace) resetPlane(choosenPlane);
                         else setPlane(choosenPlane, row, col);
 //                        Log.e("is placed?", "" + test);
 //                        Log.e("d", "" + player1.getDirection(choosenPlane - 1));
@@ -286,6 +287,58 @@ public class GameActivity extends AppCompatActivity {
             }
             return false;
         }
+    }
+
+    class AutoPlaceListener implements View.OnClickListener {
+        @Override
+        public void onClick(View v) {
+            if (player == 1) {
+                player1.randomPlace();
+                draw_plane(1);
+                draw_plane(2);
+                draw_plane(3);
+            } else {
+                player2.randomPlace();
+                draw_plane(1);
+                draw_plane(2);
+                draw_plane(3);
+            }
+        }
+    }
+
+    //draw one plane according to the num
+    void draw_plane(int num) {
+        ImageView plane = null;
+        RelativeLayout.LayoutParams img_lay = null;
+        if (num == 1) {
+            plane = plane1;
+            img_lay = lp1;
+        }
+        if (num == 2) {
+            plane = plane2;
+            img_lay = lp2;
+        }
+        if (num == 3) {
+            plane = plane3;
+            img_lay = lp3;
+        }
+        if (plane == null || img_lay == null) return;
+        int row, col, dir;
+        //begin to draw
+        if (player==1) {
+            row = player1.getRow(num - 1);
+            col = player1.getCol(num - 1);
+            dir = player1.getDirection(num - 1);
+        }
+        else {
+            row = player2.getRow(num - 1);
+            col = player2.getCol(num - 1);
+            dir = player2.getDirection(num - 1);
+        }
+        img_lay.topMargin = (row + 2) * length;
+        img_lay.leftMargin = (col + 2) * length;
+        plane.setLayoutParams(img_lay);
+        setDir(plane, dir);
     }
 
     //set direction 0:up,1:right,2:down,3:left
